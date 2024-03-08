@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Computation - GPA Calculator</title>
+  <link rel="stylesheet" href="navstyles.css">
+</head>
+
+<body>
+
+  <div class="topnav">
+    <button class="openbtn" onclick="openNav()">☰</button>
+    <button class="dark" onclick="toggleDarkMode()">🌙</button>
+    <button class="dark" onclick="window.location.href='../index.html'">🏠</button>
+  </div>
+  <div class="main-head">GPA Calculator</div>
+  <div id="mySidepanel" class="sidepanel">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <a href="about.html">About</a>
+    <a href="#">Computation</a>
+  </div>
+
+  <div class="container">
+    <h2>Computation Formulas</h2>
+    <p>This page provides information on the formulas used for GPA calculations.</p>
+
+    <h3>SGPA (Semester Grade Point Average) Calculation:</h3>
+    <p>The SGPA is calculated using the following formula:</p>
+    <pre>
+SGPA = Σ(Credits<sub>i</sub> * Grade<sub>i</sub>) / ΣCredits<sub>i</sub>
+</pre>
+    <p>Where:</p>
+    <ul>
+      <li><strong>Credits<sub>i</sub>:</strong> Credits of the ith course.</li>
+      <li><strong>Grade<sub>i</sub>:</strong> Grade obtained in the ith course (on a scale of 0 to 10).</li>
+    </ul>
+
+    <h3>CGPA (Cumulative Grade Point Average) Calculation:</h3>
+    <p>The CGPA is calculated by taking the weighted average of all the SGPA values up to the current semester:</p>
+    <pre>
+CGPA = Σ(SGPA<sub>i</sub> * Credits<sub>i</sub>) / ΣCredits<sub>i</sub>
+</pre>
+    <p>Where:</p>
+    <ul>
+      <li><strong>SGPA<sub>i</sub>:</strong> SGPA of the ith semester.</li>
+      <li><strong>Credits<sub>i</sub>:</strong> Total credits completed up to the ith semester.</li>
+    </ul>
+
+    <h3>Conversion of SGPA to CGPA:</h3>
+    <p>To convert SGPA to CGPA, you can use the following formula:</p>
+    <pre>
+CGPA = (Σ(SGPA<sub>i</sub> * Credits<sub>i</sub>) + SGPA<sub>current</sub> * Credits<sub>current</sub>) / (ΣCredits<sub>i</sub> + Credits<sub>current</sub>)
+</pre>
+    <p>Where:</p>
+    <ul>
+      <li><strong>SGPA<sub>i</sub>:</strong> SGPA of the ith semester.</li>
+      <li><strong>Credits<sub>i</sub>:</strong> Total credits completed up to the (i-1)th semester.</li>
+      <li><strong>SGPA<sub>current</sub>:</strong> SGPA of the current semester.</li>
+      <li><strong>Credits<sub>current</sub>:</strong> Credits of the current semester.</li>
+    </ul>
+
+    <p>Feel free to use the provided formulas in your GPA calculations!</p>
+  </div>
+
+  <script src="navscript.js"></script>
+</body>
+
+</html>
