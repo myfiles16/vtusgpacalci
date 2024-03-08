@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semester Marks Form</title>
+    <link rel="stylesheet" href="stylesao.css">
+</head>
+
+<body>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="#">About</a>
+        <a href="#">Computation</a>
+    </div>
+    <div class="topnav">
+        <button class="openbtn" onclick="openNav()">☰</button>
+        <button class="dark" onclick="toggleDarkMode()">🌙</button>
+        <button class="dark" onclick="window.location.href='../index.html'">🏠</button>
+    </div>
+    <form id="detailsForm">
+        <label for="userName">Name:</label>
+        <input type="text" id="userName" placeholder="Enter your name">
+
+        <label for="userID">USN:</label>
+        <input type="text" id="userID" placeholder="Enter your USN">
+    </form>
+
+    <h2>Enter SGPA of all semesters</h2>
+
+    <form id="marksForm">
+        <label for="currentSemester">Semester to calculate CGPA: </label><br>
+        <input type="number" id="currentSemester" min="1" max="8" required>
+
+        <div id="semesterFieldsContainer">
+            <script>
+
+              
+                var subjectDetails = [
+                    { codes: ["Semester 1"], credits: 0 },
+                    { codes: ["Semester 2"], credits: 0 },
+                    { codes: ["Semester 3"], credits: 0 },
+                    { codes: ["Semester 4"], credits: 0 },
+                    { codes: ["Semester 5"], credits: 0 },
+                    { codes: ["Semester 6"], credits: 0 },
+                    { codes: ["Semester 7"], credits: 0 },
+                    { codes: ["Semester 8"], credits: 0 }
+                ];
+
+                function updateCredits(semester) {
+                    var creditField = document.getElementById('sem' + semester + '_credits');
+                    subjectDetails[semester - 1].credits = parseInt(creditField.value);
+                }
+
+                for (var semester = 1; semester <= 8; semester++) {
+                    document.write("<div class='semesterFields' id='semester" + semester + "' style='display: " + (semester === 1 ? 'block' : 'none') + ";'>");
+                    document.write("<div class='semesterTitle'>Enter SGPA of Semester " + semester + "</div>");
+
+                    document.write("<label for='sem" + semester + "_credits'>Total Credits for Semester " + semester + ":</label>");
+                    document.write("<input type='number' id='sem" + semester + "_credits' name='credits[sem" + semester + "_credits]' min='0' required onchange='updateCredits(" + semester + ")'>");
+                    document.write("<br>");
+
+                    for (var subject = 1; subject <= subjectDetails[semester - 1].codes.length; subject++) {
+                        document.write("<label for='sem" + semester + "_subject" + subject + "'>" + subjectDetails[semester - 1].codes[subject - 1] + ":</label>");
+                        document.write("<input type='number' id='sem" + semester + "_subject" + subject + "' name='marks[sem" + semester + "_subject" + subject + "]' min='0' max='100' step='1' required>");
+                        document.write("<br>");
+                    }
+                    document.write("</div>");
+                }
+            </script>
+        </div>
+
+        <input type="button" value="Calculate CGPA" onclick="calculateSGPAtoCGPA()">
+        <input type="button" value="Print" onclick="window.print()">
+    </form>
+
+    <div id="tableContainer"></div>
+
+    <script>
+    function calculateSGPAtoCGPA() {
+        var numSemesters = parseInt(document.getElementById('currentSemester').value);
+        var tableContainer = document.getElementById('tableContainer');
+        tableContainer.innerHTML = "";
+
+        var totalCreditsForCGPA = 0;
+        var totalSGPAPointsForCGPA = 0;
+
+        // Create a table header
+        var tableHTML = "<table border='1'><tr><th>Semester</th><th>Credits</th><th>SGPA</th></tr>";
+
+        for (var semester = 1; semester <= numSemesters; semester++) {
+            var totalSGPA = 0;
+            var totalCredits = 0;
+
+            for (var subject = 1; subject <= subjectDetails[semester - 1].codes.length; subject++) {
+                var fieldName = 'sem' + semester + '_subject' + subject;
+                var sgpaValue = parseFloat(document.getElementById(fieldName).value);
+
+                totalSGPA += sgpaValue;
+                totalCredits += subjectDetails[semester - 1].credits;
+            }
+
+            var sgpa = (totalSGPA / subjectDetails[semester - 1].codes.length).toFixed(2);
+
+            // Append row to the table
+            tableHTML += "<tr><td>" + semester + "</td><td>" + totalCredits + "</td><td>" + sgpa + "</td></tr>";
+
+            // Calculate CGPA using the provided formula
+            totalSGPAPointsForCGPA += sgpa * totalCredits;
+            totalCreditsForCGPA += totalCredits;
+        }
+
+        // Close the table
+        tableHTML += "</table>";
+
+        // Append the table to the container
+        tableContainer.innerHTML += "<h3>SGPA Details</h3>" + tableHTML;
+
+        var cgpa = (totalSGPAPointsForCGPA / totalCreditsForCGPA).toFixed(2);
+
+        // Display CGPA
+        tableContainer.innerHTML += "<h3>CGPA upto " + numSemesters + " semester: " + cgpa + "</h3>";
+    }
+
+
+        document.getElementById('currentSemester').addEventListener('input', function () {
+            var numSemesters = parseInt(this.value);
+            var semesterFields = document.getElementsByClassName('semesterFields');
+
+            for (var i = 0; i < semesterFields.length; i++) {
+                semesterFields[i].style.display = i < numSemesters ? 'block' : 'none';
+            }
+        });
+        function openNav() {
+            var sidepanel = document.getElementById("mySidepanel");
+            sidepanel.classList.add("initial", "shaped");
+        }
+
+        function closeNav() {
+            var sidepanel = document.getElementById("mySidepanel");
+            sidepanel.classList.remove("initial", "shaped");
+        }
+
+        function toggleDarkMode() {
+            var button = document.querySelector('.dark');
+
+            // Toggle between sun and moon emoji
+            if (button.innerHTML === '🌙') {
+                button.innerHTML = '☀️';
+                // You can also add a class to the body or other elements to apply dark mode styles
+                document.body.classList.add('dark-mode');
+            } else {
+                button.innerHTML = '🌙';
+                document.body.classList.remove('dark-mode');
+            }
+        }
+    </script>
+</body>
+
+</html>

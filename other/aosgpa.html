@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semester Marks Form</title>
+    <link rel="stylesheet" href="stylesao.css">
+</head>
+
+<body>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="#">About</a>
+        <a href="#">Computation</a>
+      </div>
+      <div class="topnav">
+        <button class="openbtn" onclick="openNav()">☰</button> 
+        <button class="dark" onclick="toggleDarkMode()">🌙</button>
+        <button class="dark" onclick="window.location.href='../index.html'">🏠</button>
+      </div>
+    <form id="detailsForm">
+        <label for="userName">Name:</label>
+        <input type="text" id="userName" placeholder="Enter your name">
+
+        <label for="userID">USN:</label>
+        <input type="text" id="userID" placeholder="Enter your USN">
+    </form>
+    <form id="marksForm">
+        <h2>Enter Marks for each Subject</h2>
+        <label for="currentSemester">Semester to calculate SGPA: </label><br>
+        <input type="number" id="currentSemester" min="1" max="8" required><br>
+        <label for="subjectCount">Enter the number of subjects: </label><br>
+        <input type="number" id="subjectCount" min="1" required>
+
+        <div id="subjectDetailsContainer"></div>
+
+        <div id="semesterFieldsContainer">
+            <div id="numSemestersDisplay"></div>
+        </div>
+
+        <input type="button" value="Calculate SGPA" onclick="calculateSGPA()">
+        <input type="button" value="Print" onclick="window.print()">
+    </form>
+
+    <div id="tableContainer"></div>
+
+    <script>
+
+  
+        function generateSubjectFields() {
+            var subjectCount = parseInt(document.getElementById('subjectCount').value);
+            var subjectDetailsContainer = document.getElementById('subjectDetailsContainer');
+            subjectDetailsContainer.innerHTML = "";
+
+            for (var subject = 1; subject <= subjectCount; subject++) {
+                var subjectDiv = document.createElement('div');
+                subjectDiv.className = 'subjectDetails';
+
+                var labelCode = document.createElement('label');
+                labelCode.textContent = 'Subject ' + subject + ' Code:';
+                subjectDiv.appendChild(labelCode);
+
+                var inputCode = document.createElement('input');
+                inputCode.type = 'text';
+                inputCode.id = 'subjectCode' + subject;
+                inputCode.name = 'subjectCode' + subject;
+                inputCode.placeholder = 'Enter subject code';
+                subjectDiv.appendChild(inputCode);
+
+                var labelCredits = document.createElement('label');
+                labelCredits.textContent = 'Subject ' + subject + ' Credits:';
+                subjectDiv.appendChild(labelCredits);
+
+                var inputCredits = document.createElement('input');
+                inputCredits.type = 'number';
+                inputCredits.id = 'subjectCredits' + subject;
+                inputCredits.name = 'subjectCredits' + subject;
+                inputCredits.min = '1';
+                inputCredits.placeholder = 'Enter subject credits';
+                subjectDiv.appendChild(inputCredits);
+
+                var labelMarks = document.createElement('label');
+                labelMarks.textContent = 'Enter marks for Subject ' + subject + ':';
+                subjectDiv.appendChild(labelMarks);
+
+                var inputMarks = document.createElement('input');
+                inputMarks.type = 'number';
+                inputMarks.id = 'subjectMarks' + subject;
+                inputMarks.name = 'subjectMarks' + subject;
+                inputMarks.min = '0';
+                inputMarks.max = '100';
+                inputMarks.step = '1';
+                inputMarks.placeholder = 'Enter marks';
+                subjectDiv.appendChild(inputMarks);
+
+                subjectDetailsContainer.appendChild(subjectDiv);
+            }
+        }
+
+        document.getElementById('subjectCount').addEventListener('input', generateSubjectFields);
+
+        function calculateSGPA() {
+    var numSemesters = parseInt(document.getElementById('currentSemester').value);
+    var tableContainer = document.getElementById('tableContainer');
+    tableContainer.innerHTML = "";
+
+    var subjectCount = parseInt(document.getElementById('subjectCount').value);
+
+    for (var semester = 1; semester <= 1; semester++) {
+        var table = "<h2>Entered Marks for Semester " + numSemesters + "</h2><table border='1'><tr><th>Subject Code</th><th>Marks</th><th>Grade Points</th><th>Credits</th></tr>";
+
+        var totalCredits = 0;
+        var totalGradePoints = 0;
+
+        for (var subject = 1; subject <= subjectCount; subject++) {
+            var fieldNameMarks = 'subjectMarks' + subject;
+            var fieldValueMarks = parseInt(document.getElementById(fieldNameMarks).value);
+
+            var credits = parseInt(document.getElementById('subjectCredits' + subject).value);
+            var gradePoint;
+
+            if (fieldValueMarks >= 90) gradePoint = 10;
+            else if (fieldValueMarks >= 80) gradePoint = 9;
+            else if (fieldValueMarks >= 70) gradePoint = 8;
+            else if (fieldValueMarks >= 60) gradePoint = 7;
+            else if (fieldValueMarks >= 45) gradePoint = 6;
+            else if (fieldValueMarks >= 40) gradePoint = 4;
+            else gradePoint = 0;
+
+            var subjectTotal = credits * gradePoint;
+
+            table += "<tr><td>" + document.getElementById('subjectCode' + subject).value + "</td><td>" + fieldValueMarks + "</td><td>" + gradePoint + "</td><td>" + credits + "</td></tr>";
+
+            totalCredits += credits;
+            totalGradePoints += subjectTotal;
+        }
+
+        var sgpa = (totalGradePoints / totalCredits).toFixed(2);
+        table += "</table><p><span style='font-size: 16px; font-weight: bold;' >SGPA for Semester " + semester + ": " + sgpa + "</span></p>";
+
+        tableContainer.innerHTML += table;
+    }
+}
+function openNav() {
+  var sidepanel = document.getElementById("mySidepanel");
+  sidepanel.classList.add("initial", "shaped");
+}
+
+function closeNav() {
+  var sidepanel = document.getElementById("mySidepanel");
+  sidepanel.classList.remove("initial", "shaped");
+}
+
+function toggleDarkMode() {
+  var button = document.querySelector('.dark');
+  
+  // Toggle between sun and moon emoji
+  if (button.innerHTML === '🌙') {
+    button.innerHTML = '☀️';
+    // You can also add a class to the body or other elements to apply dark mode styles
+    document.body.classList.add('dark-mode');
+  } else {
+    button.innerHTML = '🌙';
+    document.body.classList.remove('dark-mode');
+  }
+}
+    </script>
+</body>
+
+</html>

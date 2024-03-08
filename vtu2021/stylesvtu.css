@@ -1,0 +1,414 @@
+body {
+font-family: 'Arial', sans-serif;
+background-color: #F0EDCF; /* Light blue background color */
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+text-align: center;
+transition: background-color 0.9s ease
+}
+body.dark-mode{
+    background-color: #07010b;
+  }
+h2 {
+color: #004080;
+font-family: 'Courier New', Courier, monospace;
+font-weight: bolder; /* Dark blue heading color */
+}
+body.dark-mode h2{
+    color: #ffffffcd; 
+    }
+form {
+max-width: 800px;
+margin: 20px auto;
+padding: 20px;
+background-color: #fbf9f1d8; /* White form background color */
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+border-radius: 8px;
+transition: background-color 0.9s ease
+}
+body.dark-mode form{
+    background-color: #1a1a25;
+    box-shadow: 0 0 10px rgba(236, 196, 255, 0.4);
+    color: rgb(180, 180, 180);
+  }
+#detailsForm {
+max-width: 400px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+transition: background-color 0.9s ease
+}
+body.dark-mode #detailsForm {
+    max-width: 400px;
+    box-shadow: 0 0 10px rgba(236, 196, 255, 0.4);
+    }
+label {
+text-align: left;
+display: inline-block;
+width: 30%; /* Adjust the width as needed */
+margin-bottom: 5px;
+color: #004080; /* Dark blue label color */
+}
+body.dark-mode label{
+    color: rgb(180, 180, 180);
+} 
+input[type="text"] {
+width: 65%; /* Adjust the width as needed */
+display: inline-block;
+padding: 10px;
+margin-bottom: 15px;
+box-sizing: border-box;
+border: 1px solid #b3b3b3; /* Light gray border color */
+border-radius: 4px;
+background-color: #f2f2f2; /* Light gray input background color */
+color: #333; /* Dark text color */
+}
+body.dark-mode input[type="text"] {
+    border: 1px solid #a4a4a473; 
+    background-color: #474f7a73; /* Light gray input background color */
+    color: #fff; /* Dark text color */
+    }
+input[type="number"] {
+width: 65%; /* Adjust the width as needed */
+display: inline-block;
+padding: 10px;
+margin-bottom: 15px;
+box-sizing: border-box;
+border: 1px solid #b3b3b3; /* Light gray border color */
+border-radius: 4px;
+background-color: #f2f2f2; /* Light gray input background color */
+color: #333; /* Dark text color */
+}
+body.dark-mode input[type="number"] {
+    border: 1px solid #a4a4a473; 
+    background-color: #474f7a73; /* Light gray input background color */
+    color: #fff; /* Dark text color */
+    }
+.semesterFields {
+margin-bottom: 20px; /* Add some bottom margin to separate each semester's marks input */
+padding: 10px; /* Border for each semester's marks input section */
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+border-radius: 5px;
+}
+body.dark-mode .semesterFields{
+    box-shadow: 0 0 10px rgba(236, 196, 255, 0.2);
+}
+h4{
+  color: black;
+padding-left: 20px;
+}
+h3{
+  color: black;
+padding-left: 20px;
+}
+body.dark-mode h3{
+  color: #ffffffcd;
+}
+body.dark-mode h4{
+  color: #ffffffcd;
+}
+body.dark-mode p{
+    color: #ffffffcd;
+}
+.semesterTitle {
+font-size: 18px;
+font-weight: bold;
+color: #004080; /* Dark blue semester title color */
+margin-bottom: 10px;
+}
+body.dark-mode .semesterTitle{
+    color: #ffffffcd;
+}
+input[type="button"] {
+background-color: #0B60B0; /* Dark blue button background color */
+color: white;
+padding: 10px 15px;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+body.dark-mode input[type="button"] {
+    background-color: #474F7A; /* Dark blue button background color */
+    color: white;
+    }
+input[type="button"]:hover {
+background-color: #00264d; /* Darker blue on hover */
+}
+body.dark-mode input[type="button"]:hover {
+    background-color: #2c2f42; /* Darker blue on hover */
+    }
+
+
+
+
+    #tableContainer button {
+      background-color: #0B60B0; /* Dark blue button background color */
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 30px;
+  }
+  
+  #tableContainer.dark-mode button {
+      background-color: #474F7A; /* Dark blue button background color */
+      color: white;
+  }
+  
+  #tableContainer button:hover {
+      background-color: #00264d; /* Darker blue on hover */
+  }
+  
+  #tableContainer.dark-mode button:hover {
+      background-color: #2c2f42; /* Darker blue on hover in dark mode */
+  }
+  #detailedBreakdownContainer table {
+    margin: 0 auto; /* Center-align the table */
+    margin-bottom: 30px;
+}
+    #tableContainer {
+      display: inline-block;
+      text-align: center;
+    }
+    
+    /* Mobile view */
+    @media only screen and (max-width: 767px) {
+      #tableContainer {
+        margin: auto;
+      }
+    }
+    
+    /* Desktop view */
+    @media only screen and (min-width: 768px) {
+      #tableContainer {
+        margin: 0 200px; /* Adjust the left and right margin values as needed */
+      }
+    }
+    
+
+table {
+width: 800px;
+border-collapse: collapse;
+margin-top: 10px;
+}
+
+th{
+border: 2px solid black;
+padding: 8px;
+text-align: left;
+}
+td {
+    border: 1px solid black !important;
+    padding: 8px;
+    text-align: left;
+    }
+body.dark-mode th {
+    border: 1.5px solid #ddd !important;
+    }
+    body.dark-mode td {
+        border: 1px solid #ddd !important;
+        padding: 8px;
+    text-align: left;
+    color: #fff;
+        }
+th {
+background-color: #0B60B0; /* Dark blue table header background color */
+color: white;
+}
+body.dark-mode th{
+    background-color: #474F7A;
+}
+@media print {
+  
+body{
+background-color: white !important;
+h2.no-print{
+    display: none;
+}
+#tableContainer{
+  button 
+  {
+  display: none;
+  }
+}
+#fieldOfStudy{
+    background-color: white !important;
+    color: black !important;
+}
+th{
+    border: 2px solid black !important;
+    background-color: white !important;
+    color: black !important;
+}
+h2{
+    color: black !important;
+}
+p{
+  color: black !important;
+}
+h3{
+  color: black !important;
+}
+h4{
+  color: black !important;
+}
+}
+form {
+display: none; /* Hide the form during printing */
+}
+#detailsForm{
+display: block !important;
+background-color: white !important;
+color: black !important;
+box-shadow: none !important;
+max-width: none !important;
+margin: 0;
+}
+
+body.dark-mode input[type="text"] {
+    background-color: white;
+    color: black;
+}
+label{
+    color: black !important;
+}
+td{
+    border: 1px solid black !important;
+    color: black !important;
+}
+.topnav{
+    display: none;
+}
+}
+#fieldOfStudy {
+padding: 10px; /* Adjust padding as needed */
+font-size: 16px; /* Adjust font size as needed */
+width: auto; /* Adjust width as needed */
+background-color: #0B60B0;
+color: white;
+/* Add more styles as per your preference */
+}
+body.dark-mode #fieldOfStudy {
+    background-color: #474F7A;
+    color: white;
+    /* Add more styles as per your preference */
+    }
+
+/* Style for the options within the select */
+#fieldOfStudy option {
+background-color: #ffffff; /* Background color of options */
+color: #333; /* Text color of options */
+/* Add more styles as per your preference */
+}
+body.dark-mode #fieldOfStudy option {
+    background-color: #1e1e36; /* Background color of options */
+    color: #fff; /* Text color of options */
+    /* Add more styles as per your preference */
+    }
+.sidepanel  {
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    height: 100%;
+    text-align: left !important;
+    top: 0;
+    left: 0;
+    background-color: #0B60B0;
+    overflow-x: hidden;
+    transition: 0.6s;
+    padding-top: 60px;
+  }
+  body.dark-mode .sidepanel{
+    background-color:#1a1a25;
+    color: rgb(180, 180, 180);
+  }
+  .sidepanel a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #ffffff;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidepanel a:hover {
+    color: #b4ac4d;
+  }
+  body.dark-mode .sidepanel a:hover {
+    color: #b187d7;
+  }
+  .sidepanel .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+  }
+  
+  .openbtn {
+    margin-left: 0px;
+    text-align: left !important;
+    font-size: 20px;
+    width: 50px;
+    cursor: pointer;
+    background-color: #0B60B0;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 0%;
+    display: inline-block;
+  }
+  body.dark-mode .openbtn{
+    background-color:#1a1a25;
+  }
+  .dark {
+    margin-left: 0px;
+    text-align: left;
+    font-size: 20px;
+    width: 50px;
+    cursor: pointer;
+    background-color: #0B60B0;
+    color: white;
+    padding: 10px 11px;
+    border: none;
+    border-radius: 0%;
+    display: inline-block;
+  }
+  body.dark-mode .dark{
+    background-color:#1a1a25;
+  }
+  .topnav{
+    padding: auto;
+    text-align: left !important;
+    background-color: #0B60B0;
+    transition: background-color 1s ease;
+  }
+  body.dark-mode .topnav{
+    padding: auto;
+    background-color: #1a1a25;
+  }
+  .openbtn:hover {
+    background-color:#00305e;
+  }
+  .dark:hover {
+    background-color:#1a1a25;
+  }
+  body.dark-mode .openbtn:hover {
+    background-color:#07010b;
+  }
+  body.dark-mode .dark:hover {
+    background-color:#07010b;
+  }
+  /* Initial state */
+  .sidepanel {
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    width: 0;
+    transition: all 2s;
+  }
+  
+  /* Shaped state */
+  .sidepanel.shaped {
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    width: 250px;
+    transition: all 2s;
+  }
+  

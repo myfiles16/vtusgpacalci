@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semester Marks Form</title>
+    <link rel="stylesheet" href="stylesvtu.css">
+    
+</head>
+<body>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="#">About</a>
+        <a href="#">Computation</a>
+      </div>
+      <div class="topnav">
+        <button class="openbtn" onclick="openNav()">☰</button> 
+        <button class="dark" onclick="toggleDarkMode()">🌙</button>
+        <button class="dark" onclick="window.location.href='../index.html'">🏠</button>
+      </div>
+    <h2 class="no-print">Choose Field of Study:</h2>
+    <select id="fieldOfStudy" onchange="updateSubjectList()">
+        <option value="CSE">Computer Science and Engineering</option>
+        <option value="CSE-AI">Computer Scince and Engineering(AI)</option>
+        <option value="ISE">Information Science and Engineering</option>
+        <option value="ECE">Electronics and Communication Engineering</option>
+        <option value="MECH">Mechanical Engineering</option>
+        <option value="CIV">Civil Engineering</option>
+    </select>
+    
+    <form id="detailsForm">
+        <label for="userName">Name:</label>
+        <input type="text" id="userName" placeholder="Enter your name">
+
+        <label for="userID">USN:</label>
+        <input type="text" id="userID" placeholder="Enter your USN">
+    </form>
+    <form id="marksForm">
+        <h2>Enter Marks for each Subject</h2>
+        <label for="currentSemester">Semester to calculate SGPA: </label><br>
+        <input type="number" id="currentSemester" min="1" max="8" required>
+        <!-- Display subjects for each semester -->
+        <div id="semesterFieldsContainer">
+            <div id="numSemestersDisplay"></div>
+            <!-- Define the subject counts for each semester -->
+            <script>
+                var numSemesters = 1; // Set a default value, you can adjust it as needed
+            
+                document.getElementById('currentSemester').addEventListener('change', function () {
+                    numSemesters = parseInt(this.value);
+            
+                    // Hide all semesters initially
+                    for (var i = 1; i <= 8; i++) {
+                        document.getElementById('semester' + i).style.display = 'none';
+                    }
+            
+                    // Show the selected semester
+                    document.getElementById('semester' + numSemesters).style.display = 'block';
+                });
+                var subjectDetails;
+                function updateSubjectList() {
+            var selectedField = document.getElementById('fieldOfStudy').value;
+            var subjectContainer = document.getElementById('semesterFieldsContainer');
+            subjectContainer.innerHTML = "";
+
+            if (selectedField === "CSE") {
+                subjectDetails = [
+                    { codes: ["21MAT11", "21PHY12", "21ELE13", "21CIV14", "21EVNL15", "21PHYL16", "21ELEL17", "21EGH18", "21IDT19"], credits: [3, 3, 3, 3, 3, 1, 1, 2, 1] },
+                    { codes: ["21MAT21","21CHE22","21PSP23","21ELN24","21EME25","21CHEL26","21CPL27","21EGH28","21SFH29"], credits: [3, 3, 3, 3, 3, 1, 1, 2, 1] },
+                    { codes: ["21MAT31","21CS32","21CS33","21CS34","21CSL35","21CSL381","21SCR36","21CIP37"], credits: [3, 4, 4, 3, 1, 1, 1, 1] },
+                    { codes: ["21MATCS41","21CS42","21CS43","21CS44","21BE45","21CSL46","21CSL481","21KSK47","21UH49","21INT49"], credits: [3, 4, 4, 3, 2, 1, 1, 1, 1, 2] },
+                    { codes: ["21CS51","21CS52","21CS53","21CS54","21CSL55","21CSL581 / 21CS582","21RMI56","21CIV57"], credits: [3, 4, 3, 3, 1, 1, 2, 1] },
+                    { codes: ["21CS61", "21CS62", "21CS63", "21XX64x", "21XX65x", "21CSL66", "21CSMP67", "21INT68"], credits: [3, 4, 3, 3, 3, 1, 2, 3] },
+                    { codes: ["21CS71", "21CS72", "21XX73X", "21XX74X", "21XX75X", "21CSP76"], credits: [3, 2, 3, 3, 3, 10] },
+                    { codes: ["21CS81", "21INT82", "NCMC"], credits: [1, 15, 0] }
+                ];
+            } 
+            else if (selectedField === "CSE-AI") {
+                subjectDetails = [
+                    { codes: ["21MAT11", "21PHY12", "21ELE13", "21CIV14", "21EVNL15", "21PHYL16", "21ELEL17", "21EGH18", "21IDT19"], credits: [3, 3, 3, 3, 3, 1, 1, 2, 1] },
+                    { codes: ["21MAT21", "21CHE22", "21PSP23", "21ELN24", "21EME25", "21CHEL26", "21CPL27", "21EGH28", "21SFH29"], credits: [3, 3, 3, 3, 3, 1, 1, 2, 1] },
+                    { codes: ["21MAT31", "21CS32", "21CS33", "21CS34", "21CSL35", "21UH36", "21CIP37", "21CSL38X"], credits: [3, 4, 4, 3, 1, 1, 1, 1] },
+                    { codes: ["21CS41", "21CS42", "21CS43", "21CS44", "21BE45", "21CSL46", "21KSK47 / 21KBK47", "21CSL48X", "21UH49", "21INT49"], credits: [3, 4, 4, 3, 2, 1, 1, 1, 1, 2] },
+                    { codes: ["21CS51", "21CS52", "21CS53", "21AI54", "21CSL55", "21RMI56", "21CIV57", "21CSL58X"], credits: [3, 4, 3, 3, 1, 1, 2, 1] },
+                    { codes: ["21CS61", "21AD62", "21AI63", "21XX64x", "21XX65x", "21AIL66", "21AIMP67", "21INT68"], credits: [3, 4, 3, 3, 3, 1, 2, 3] },
+                    { codes: ["21AI71", "21CS72", "21XX73X", "21XX74X", "21XX75X", "21AIP76"], credits: [3, 2, 3, 3, 3, 10] },
+                    { codes: ["21AI81", "21INT82", "NCMC"], credits: [1, 15, 0] }
+                ];
+            }
+            else if (selectedField === "ISE") {
+                subjectDetails = [
+                    { codes: ["21MAT11", "21PHY12", "21ELE13", "21CIV14", "21EVNL15", "21PHYL16", "21ELEL17", "21EGH18", "21IDT19"], credits: [3, 3, 3, 3, 3, 1, 1, 2, 1] },
+                    { codes: ["21MAT21", "21CHE22", "21PSP23", "21ELN24", "21EME25", "21CHEL26", "21CPL27", "21EGH28", "21SFH29"], credits: [3, 3, 3, 3, 3, 1, 1, 2, 1] },
+                    { codes: ["21MAT31", "21CS32", "21CS33", "21CS34", "21CSL35", "21UH36", "21CIP37", "21CSL38X"], credits: [3, 4, 4, 3, 1, 1, 1, 1] },
+                    { codes: ["21CS41", "21CS42", "21CS43", "21CS44", "21BE45", "21CSL46", "21KSK47 / 21KBK47", "21CSL48X", "21UH49", "21INT49"], credits: [3, 4, 4, 3, 2, 1, 1, 1, 1, 2] },
+                    { codes: ["21CS51", "21CS52", "21CS53", "21CS54", "21CSL55", "21RMI56", "21CIV57", "21CSL58X"], credits: [3, 4, 3, 3, 1, 1, 2, 1] },
+                    { codes: ["21CS61", "21CS62", "21IS63", "21XX64x", "21XX65x", "21ISL66", "21ISMP67", "21INT68"], credits: [3, 4, 3, 3, 3, 1, 2, 3] },
+                    { codes: ["21IS71", "21CS72", "21XX73X", "21XX74X", "21XX75X", "21ISP76"], credits: [3, 2, 3, 3, 3, 10] },
+                    { codes: ["21IS81", "21INT82", "NCMC"], credits: [1, 15, 0] }
+                ];
+            }
+             else if (selectedField === "ECE") {
+                subjectDetails = [
+                    { codes: ["21MAT11", "21PHY12", "21ELE13", "21CIV14", "21EVNL15", "21PHYL16", "21ELEL17", "21EGH18", "21IDT19"], credits: [3, 3, 3, 3, 3, 1, 1, 2, 1] },
+                    { codes: ["21MAT21", "21CHE22", "21PSP23", "21ELN24", "21EME25", "21CHEL26", "21CPL27", "21EGH28", "21SFH29"], credits: [3, 3, 3, 3, 3, 1, 1, 2, 1] },
+                    { codes: ["21MAT31", "21EC32", "21EC33", "21EC34", "21ECL35", "21UH36", "21CIP37", "21EC38X"], credits: [3, 4, 4, 3, 1, 1, 1, 1] },
+                    { codes: ["21EC41", "21EC42", "21EC43", "21EC44", "21BE45", "21ECL46", "21KSK47 / 21KBK47", "21EC48X", "21UH49", "21INT49"], credits: [3, 4, 4, 3, 2, 1, 1, 1, 1, 2] },
+                    { codes: ["21EC51", "21EC52", "21EC53", "21EC54", "21ECL55", "21EC56", "21CIV57", "21EC58X"], credits: [3, 4, 3, 3, 1, 1, 2, 1] },
+                    { codes: ["21EC61", "21EC62", "21EC63", "21EC64x", "21EC65x", "21ECL66", "21ECMP67", "21INT68"], credits: [3, 4, 3, 3, 3, 1, 2, 3] },
+                    { codes: ["21EC71", "21EC72", "21EC72X", "21EC73X", "21EC74X", "21ECP75"], credits: [3, 2, 3, 3, 3, 10] },
+                    { codes: ["21EC81", "21INT82", "NCMC"], credits: [1, 15, 0] }
+                ];
+            }
+            else if (selectedField === "MECH") {
+                subjectDetails = [
+                    { codes: ["21MAT11", "21PHY12", "21ELE13", "21CIV14", "21EVNL15", "21PHYL16", "21ELEL17", "21EGH18", "21IDT19"], credits: [3, 3, 3, 3, 3, 1, 1, 2, 1] },
+                    { codes: ["21MAT21", "21CHE22", "21PSP23", "21ELN24", "21EME25", "21CHEL26", "21CPL27", "21EGH28", "21SFH29"], credits: [3, 3, 3, 3, 3, 1, 1, 2, 1] },
+                    { codes: ["21MAT31", "21ME32", "21ME33", "21ME34", "21MEL35", "21UH36", "21CIP37", "21ME38X"], credits: [3, 4, 4, 3, 1, 1, 1, 1] },
+                    { codes: ["21ME41", "21ME42", "21ME43", "21ME44", "21BE45", "21MEL46", "21KSK47 / 21KBK47", "21XX48X", "21UH49", "21INT49"], credits: [3, 4, 4, 3, 2, 1, 1, 1, 1, 2] },
+                    { codes: ["21ME51", "21ME52", "21ME53", "21ME54", "21MEL55", "21XX56", "21CIV57", "21ME58X"], credits: [3, 4, 3, 3, 1, 1, 2, 1] },
+                    { codes: ["21ME61", "21ME62", "21ME63", "21ME64x", "21ME65x", "21MEL66", "21MEMP67", "21INT68"], credits: [3, 4, 3, 3, 3, 1, 2, 3] },
+                    { codes: ["21ME71", "21ME72", "21ME73X", "21ME74X", "21ME75X", "21MEP76"], credits: [3, 2, 3, 3, 3, 10] },
+                    { codes: ["21XX81", "21INT82", "NCMC"], credits: [1, 15, 0] }
+                ];
+            }
+            else if (selectedField === "CIV") {
+                subjectDetails = [
+                    { codes: ["21MAT11", "21PHY12", "21ELE13", "21CIV14", "21EVNL15", "21PHYL16", "21ELEL17", "21EGH18", "21IDT19"], credits: [3, 3, 3, 3, 3, 1, 1, 2, 1] },
+                    { codes: ["21MAT21", "21CHE22", "21PSP23", "21ELN24", "21EME25", "21CHEL26", "21CPL27", "21EGH28", "21SFH29"], credits: [3, 3, 3, 3, 3, 1, 1, 2, 1] },
+                    { codes: ["21MAT31", "21CV32", "21CV33", "21CV34", "21CVL35", "21UH36", "21CIP37", "21CV38X"], credits: [3, 4, 4, 3, 1, 1, 1, 1] },
+                    { codes: ["21MAT41", "21CV42", "21CV43", "21CV44", "21BE45", "21CVL46", "21KSK47 / 21KBK47", "21CV48X", "21UH49", "21INT49"], credits: [3, 4, 4, 3, 2, 1, 1, 1, 1, 2] },
+                    { codes: ["21CV51", "21CV52", "21CV53", "21CV54", "21CVL55", "21CV56", "21CIV57", "21CV58X"], credits: [3, 4, 3, 3, 1, 1, 2, 1] },
+                    { codes: ["21CV61", "21CV62", "21CV63", "21CV64x", "21CV65x", "21CVL66", "21CVMP67", "21INT68"], credits: [3, 4, 3, 3, 3, 1, 2, 3] },
+                    { codes: ["21CV71", "21CV72", "21CV72X", "21CV73X", "21CV74X", "21CVP75"], credits: [3, 2, 3, 3, 3, 10] },
+                    { codes: ["21CV81", "21INT82", "NCMC"], credits: [1, 15, 0] }
+                ];
+            }
+            for (var semester = 1; semester <= 8; semester++) {
+        var semesterFields = document.createElement('div');
+        semesterFields.className = 'semesterFields';
+        semesterFields.id = 'semester' + semester;
+        semesterFields.style.display = semester === numSemesters ? 'block' : 'none';
+
+        var semesterTitle = document.createElement('div');
+        semesterTitle.className = 'semesterTitle';
+        semesterTitle.innerText = 'Enter marks for Semester ' + semester;
+
+        semesterFields.appendChild(semesterTitle);
+
+        for (var subject = 1; subject <= subjectDetails[semester - 1].codes.length; subject++) {
+            var label = document.createElement('label');
+            label.setAttribute('for', 'sem' + semester + '_subject' + subject);
+            label.innerText = subjectDetails[semester - 1].codes[subject - 1] + ":";
+
+            var input = document.createElement('input');
+            input.type = 'number';
+            input.id = 'sem' + semester + '_subject' + subject;
+            input.name = 'marks[sem' + semester + '_subject' + subject + ']';
+            input.min = '0';
+            input.max = '100';
+            input.step = '1';
+            input.required = true;
+
+            semesterFields.appendChild(label);
+            semesterFields.appendChild(input);
+            semesterFields.appendChild(document.createElement('br'));
+        }
+
+        subjectContainer.appendChild(semesterFields);
+    }
+            }
+            updateSubjectList();
+            </script>
+        </div>
+
+        <input type="button" value="Calculate SGPA" onclick="calculateSGPA()">
+        <input type="button" value="Print" onclick="window.print()">
+    </form>
+
+    <div id="tableContainer"></div>
+
+    <script>
+        function calculateSGPA() {
+    var numSemesters = parseInt(document.getElementById('currentSemester').value);
+    var tableContainer = document.getElementById('tableContainer');
+    tableContainer.innerHTML = "";
+
+    for (var semester = numSemesters; semester <= numSemesters; semester++) {
+        var table = "<h2>Entered Marks for Semester " + semester + "</h2><table border='1'><tr><th>Subject Code</th><th>Marks</th><th>Grade Points</th><th>Credits</th></tr>";
+
+        var totalCredits = 0;
+        var totalGradePoints = 0;
+
+        for (var subject = 1; subject <= subjectDetails[semester - 1].codes.length; subject++) {
+            var fieldName = 'sem' + semester + '_subject' + subject;
+            var fieldValue = parseInt(document.getElementById(fieldName).value);
+
+            // Calculate grade points based on marks
+            var gradePoint;
+            if (fieldValue >= 90) gradePoint = 10;
+            else if (fieldValue >= 80) gradePoint = 9;
+            else if (fieldValue >= 70) gradePoint = 8;
+            else if (fieldValue >= 60) gradePoint = 7;
+            else if (fieldValue >= 45) gradePoint = 6;
+            else if (fieldValue >= 40) gradePoint = 4;
+            else gradePoint = 0;
+
+            var credits = subjectDetails[semester - 1].credits[subject - 1];
+            var subjectTotal = credits * gradePoint;
+
+            table += "<tr><td>" + subjectDetails[semester - 1].codes[subject - 1] + "</td><td>" + fieldValue + "</td><td>" + gradePoint + "</td><td>" + subjectDetails[semester - 1].credits[subject - 1] + "</td></tr>";
+
+            totalCredits += credits;
+            totalGradePoints += subjectTotal;
+        }
+
+        var sgpa = (totalGradePoints / totalCredits).toFixed(2);
+        table += "</table><p><span style='font-size: 19px; font-weight: bold;' >SGPA for Semester " + semester + ": " + sgpa + "</span></p>";
+
+        tableContainer.innerHTML += table;
+    }
+}
+        document.getElementById('currentSemester').addEventListener('input', function () {
+        var numSemesters = parseInt(this.value);
+        var semesterFields = document.getElementsByClassName('semesterFields');
+
+        for (var i = numSemesters; i < semesterFields.length; i++) {
+            semesterFields[i].style.display = i < numSemesters ? 'block' : 'none';
+        }
+    });
+    function openNav() {
+  var sidepanel = document.getElementById("mySidepanel");
+  sidepanel.classList.add("initial", "shaped");
+}
+
+function closeNav() {
+  var sidepanel = document.getElementById("mySidepanel");
+  sidepanel.classList.remove("initial", "shaped");
+}
+
+function toggleDarkMode() {
+  var button = document.querySelector('.dark');
+  
+  // Toggle between sun and moon emoji
+  if (button.innerHTML === '🌙') {
+    button.innerHTML = '☀️';
+    // You can also add a class to the body or other elements to apply dark mode styles
+    document.body.classList.add('dark-mode');
+  } else {
+    button.innerHTML = '🌙';
+    document.body.classList.remove('dark-mode');
+  }
+}
+
+
+    </script>
+
+</body>
+</html>
