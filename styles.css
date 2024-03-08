@@ -16,7 +16,7 @@ body.dark-mode{
   font-size: 50px;
   font-weight: 900;
   text-align: center;
-  font-family: 'Courier New', Courier, monospace;
+  font-family:'Courier New', Courier, monospace ;
   color: rgb(27, 54, 122);
 }
 .container {
@@ -178,12 +178,12 @@ body.dark-mode .topnav{
 .sidepanel {
   clip-path: polygon(0 0, 100% 0, 0 100%);
   width: 0;
-  transition: all 2s;
+  transition: all 1.5s;
 }
 
 /* Shaped state */
 .sidepanel.shaped {
   clip-path: polygon(0 0, 100% 0, 0 100%);
   width: 250px;
-  transition: all 2s;
+  transition: all 1.5s;
 }
