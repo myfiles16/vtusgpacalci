@@ -178,4 +178,16 @@ body {
     width: 250px;
     transition: all 2s;
   }
-  
+  /* Add the following CSS inside your media query for smaller screens */
+@media only screen and (max-width: 600px) {
+  body {
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    overflow-y: auto; /* Enable vertical scrollbar if needed */
+  }
+
+  .container {
+    padding: 10px; /* Adjust padding as needed */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  }
+
+}
