@@ -32,6 +32,10 @@ body {
     color: black;
     font-family: 'Franklin Gothic light', 'Arial Narrow', Arial, sans-serif;
   }
+ body.dark-mode .intro{
+    color: rgb(180, 180, 180);
+    transition: background-color 0.8s ease;
+  }
   h2{
     padding-left: 1%;
     flex-wrap: wrap;
