@@ -176,6 +176,12 @@ body.dark-mode input[type="button"]:hover {
       #tableContainer {
         margin: auto;
       }
+      table {
+        width: 350px;
+        border-collapse: collapse;
+        margin-top: 10px;
+        margin-bottom: 30px;
+        }
     }
     
     /* Desktop view */
@@ -183,14 +189,16 @@ body.dark-mode input[type="button"]:hover {
       #tableContainer {
         margin: 0 200px; /* Adjust the left and right margin values as needed */
       }
+      table {
+        width: 800px;
+        border-collapse: collapse;
+        margin-top: 10px;
+        margin-bottom: 30px;
+        }
     }
     
 
-table {
-width: 800px;
-border-collapse: collapse;
-margin-top: 10px;
-}
+
 
 th{
 border: 2px solid black;
@@ -225,6 +233,12 @@ background-color: white !important;
 h2.no-print{
     display: none;
 }
+table {
+  width: 800px;
+  border-collapse: collapse;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  }
 #tableContainer{
   button 
   {
