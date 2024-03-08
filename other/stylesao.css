@@ -18,6 +18,13 @@ h2 {
 body.dark-mode h2{
   color: #ffffffcd; 
   }
+  h3{
+    color: black;
+  padding-left: 20px;
+  }
+  body.dark-mode h3{
+    color: #ffffffcd;
+  }
 form {
     max-width: 800px;
     margin: 20px auto;
@@ -123,57 +130,68 @@ body.dark-mode input[type="button"] {
 @media only screen and (max-width: 767px) {
   #tableContainer {
     margin: auto;
+    
   }
+  table {
+    width: 350px;
+    border-collapse: collapse;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    }
 }
 
 /* Desktop view */
 @media only screen and (min-width: 768px) {
   #tableContainer {
-    margin: 0 200px; /* Adjust the left and right margin values as needed */
+    align-items: center;  
   }
+  table {
+    width: 800px;
+    border-collapse: collapse;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    margin: auto;
+    }
 }
 
-table {
-  width: 800px;
-  border-collapse: collapse;
-  margin-top: 10px;
-  margin: 0 auto; /* Center-align the table */
-  margin-bottom: 30px;
-  }
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-th {
-    background-color: #0B60B0;
-    color: white;
-}
-td {
-  border: 1px solid black !important;
+th{
+  border: 2px solid black;
   padding: 8px;
   text-align: left;
   }
-body.dark-mode th {
-  border: 1.5px solid #ddd !important;
-  }
-  body.dark-mode td {
-      border: 1px solid #ddd !important;
+  td {
+      border: 1px solid black !important;
       padding: 8px;
-  text-align: left;
-  color: #fff;
+      text-align: left;
       }
-      body.dark-mode th{
-        background-color: #474F7A;
-    }
+  body.dark-mode th {
+      border: 1.5px solid #ddd !important;
+      }
+      body.dark-mode td {
+          border: 1px solid #ddd !important;
+          padding: 8px;
+      text-align: left;
+      color: #fff;
+          }
+  th {
+  background-color: #0B60B0; /* Dark blue table header background color */
+  color: white;
+  }
+  body.dark-mode th{
+      background-color: #474F7A;
+  }
     @media print {
       body{
       background-color: white !important;
       h2.no-print{
           display: none;
       }
+      table {
+        width: 800px;
+        border-collapse: collapse;
+        margin-top: 10px;
+        margin-bottom: 30px;
+        }
       #fieldOfStudy{
           background-color: white !important;
           color: black !important;
