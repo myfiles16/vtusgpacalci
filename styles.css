@@ -13,10 +13,10 @@ body.dark-mode{
 }
 .main-head{
   padding-top:30px; 
-  font-size: 60px;
+  font-size: 50px;
   font-weight: 900;
   text-align: center;
-  font-family: cursive;
+  font-family: 'Courier New', Courier, monospace;
   color: rgb(27, 54, 122);
 }
 .container {
