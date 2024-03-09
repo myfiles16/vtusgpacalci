@@ -18,7 +18,7 @@
         <button id="toggle-icon" class="dark" onclick="toggleDarkMode()">🌙</button>
         <button class="dark" onclick="window.location.href='../index.html'">🏠</button>
     </div>
-    <h2>Choose Field of Study:</h2>
+    <h2 class="no-print">Choose Field of Study:</h2>
     <select id="fieldOfStudy" onchange="updateSubjectList()">
         <option value="CSE">Computer Science and Engineering</option>
         <option value="CSE-AI">Computer Scince and Engineering(AI)</option>
@@ -220,8 +220,7 @@
         <input type="button" value="Print" onclick="window.print()">
     </form>
 
-    <div id="tableContainer">     
-    </div>
+    <div id="tableContainer"></div>
     <div id="detailedBreakdownContainer"></div>
 
     <script>
@@ -265,7 +264,7 @@
     }
 
     var finalCGPA = (totalCGPAPoints / totalCreditsForCGPA).toFixed(2);
-    tableContainer.innerHTML += "<H3>CGPA for all semesters: " + finalCGPA + "</H3>";
+    tableContainer.innerHTML += "<H3>CGPA upto "+numSemesters+" semester: " + finalCGPA + "</H3>";
     // Display the "Detailed breakdown" button
     var detailedBreakdownButton = document.createElement('button');
         detailedBreakdownButton.innerHTML = 'Detailed breakdown';
@@ -318,6 +317,16 @@ function showDetailedBreakdown() {
 
         detailedBreakdownContainer.appendChild(semesterDetails);
     }
+    var tableContainer = document.getElementById('tableContainer');
+    tableContainer.style.display = 'block';
+
+    // Get all h4 elements within tableContainer
+    var h4Elements = tableContainer.getElementsByTagName('h4');
+
+    // Iterate through h4 elements and hide their contents
+    for (var i = 0; i < h4Elements.length; i++) {
+    h4Elements[i].style.display = 'none';
+}
 }
 
         document.getElementById('currentSemester').addEventListener('input', function () {
