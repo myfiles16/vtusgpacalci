@@ -135,7 +135,7 @@ body.dark-mode input[type="button"] {
   table {
     width: 350px;
     border-collapse: collapse;
-    margin-top: 10px;
+    margin: 0 auto; /* Center-align the table */
     margin-bottom: 30px;
     }
 }
