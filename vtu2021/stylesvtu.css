@@ -179,7 +179,7 @@ body.dark-mode input[type="button"]:hover {
       table {
         width: 350px;
         border-collapse: collapse;
-        margin-top: 10px;
+        margin: 0 auto;
         margin-bottom: 30px;
         }
     }
