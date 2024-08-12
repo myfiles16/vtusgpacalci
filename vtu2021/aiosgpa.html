@@ -198,13 +198,24 @@
 
             // Calculate grade points based on marks
             var gradePoint;
-            if (fieldValue >= 90) gradePoint = 10;
-            else if (fieldValue >= 80) gradePoint = 9;
-            else if (fieldValue >= 70) gradePoint = 8;
-            else if (fieldValue >= 60) gradePoint = 7;
-            else if (fieldValue >= 45) gradePoint = 6;
-            else if (fieldValue >= 40) gradePoint = 4;
-            else gradePoint = 0;
+            if (fieldValue >= 90 && fieldValue <= 100) {
+                gradePoint = 10; // Grade point for 90-100
+            } else if (fieldValue >= 80 && fieldValue <= 89) {
+                gradePoint = 9; // Grade point for 80-89
+            } else if (fieldValue >= 70 && fieldValue <= 79) {
+                gradePoint = 8; // Grade point for 70-79
+            } else if (fieldValue >= 60 && fieldValue <= 69) {
+                gradePoint = 7; // Grade point for 60-69
+            } else if (fieldValue >= 55 && fieldValue <= 59) {
+                gradePoint = 6; // Grade point for 55-59
+            } else if (fieldValue >= 50 && fieldValue <= 54) {
+                gradePoint = 5; // Grade point for 50-54
+            } else if (fieldValue >= 40 && fieldValue <= 49) {
+                gradePoint = 4; // Grade point for 40-49
+            } else {
+                gradePoint = 0; // Grade point for anything below 40
+            }
+
 
             var credits = subjectDetails[semester - 1].credits[subject - 1];
             var subjectTotal = credits * gradePoint;
